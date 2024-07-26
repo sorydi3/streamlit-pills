@@ -44,7 +44,7 @@ def pills(
             clicking on it. If None, this is possible if `index` is set to None.
             Defaults to None.
         key (str, optional): The key of the component. Defaults to None.
-        reset (bool, optional): If True, the component will reset to none.
+        reset (bool, optional): If True, the component index will reset to none.
 
     Returns:
         (any): The text of the pill selected by the user (same value as in `options`).
