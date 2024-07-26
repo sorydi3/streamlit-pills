@@ -3,10 +3,12 @@ from typing import Iterable, Union, Callable
 
 import streamlit.components.v1 as components
 
-_RELEASE = True
+_RELEASE = False
 
 if not _RELEASE:
-    _component_func = components.declare_component("pills", url="http://localhost:3001")
+    print("connecting Ibra...")
+    _component_func = components.declare_component("pills", url="http://10.0.1.167:3001")
+    print("TRYIING TO CONNECT TO COMPONENT!!!",_component_func)
 else:
     path = (Path(__file__).parent / "frontend" / "build").resolve()
     _component_func = components.declare_component("pills", path=path)
