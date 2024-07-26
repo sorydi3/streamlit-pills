@@ -3,7 +3,7 @@ from typing import Iterable, Union, Callable
 
 import streamlit.components.v1 as components
 
-_RELEASE = False
+_RELEASE = True
 
 if not _RELEASE:
     print("connecting Ibra...")
