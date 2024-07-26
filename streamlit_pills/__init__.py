@@ -7,7 +7,7 @@ _RELEASE = False
 
 if not _RELEASE:
     print("connecting Ibra...")
-    _component_func = components.declare_component("pills", url="http://10.0.1.167:3001")
+    _component_func = components.declare_component("pills", url="http://localhost:3001")
     print("TRYIING TO CONNECT TO COMPONENT!!!",_component_func)
 else:
     path = (Path(__file__).parent / "frontend" / "build").resolve()
@@ -24,6 +24,7 @@ def pills(
     label_visibility: str = "visible",
     clearable: bool = None,
     key: str = None,
+    reset: bool = False,
 ):
     """Shows clickable pills.
 
@@ -43,6 +44,7 @@ def pills(
             clicking on it. If None, this is possible if `index` is set to None.
             Defaults to None.
         key (str, optional): The key of the component. Defaults to None.
+        reset (bool, optional): If True, the component will reset to none.
 
     Returns:
         (any): The text of the pill selected by the user (same value as in `options`).
@@ -70,6 +72,9 @@ def pills(
 
     if clearable is None and index is None:
         clearable = True
+
+    if reset is None:
+        reset = False
         
     if format_func:
         formatted_options = [format_func(option) for option in options]
@@ -81,11 +86,12 @@ def pills(
         label=label,
         options=formatted_options,
         icons=icons,
-        index=index,
+        index=None if reset else index,
         label_visibility=label_visibility,
         clearable=clearable,
         key=key,
-        default=index,
+        default=None if reset else index,
+        reset=reset,
     )
 
     # The frontend component returns the index of the selected pill but we want to
@@ -93,4 +99,4 @@ def pills(
     if component_value is None or component_value == "None":
         return None
     else:
-        return options[component_value]
+        return None if reset else options[component_value] 

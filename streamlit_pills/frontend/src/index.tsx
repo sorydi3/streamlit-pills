@@ -19,8 +19,10 @@ function onRender(event: Event): void {
   let icons = data.args["icons"]
   let index = data.args["index"]
   let label_visibility = data.args["label_visibility"]
+  let reset = data.args["reset"]
+  
   let clearable = data.args["clearable"]
-  // console.log(captions)
+  console.log(options)
 
   if (label_visibility === "hidden") {
     labelDiv.style.visibility = "hidden"
@@ -32,9 +34,9 @@ function onRender(event: Event): void {
   if (container.childNodes.length === 0) {
     options.forEach((option: string, i: number) => {
       let pill = container.appendChild(document.createElement("div"))
-      pill.classList.add("pill")
+      pill.classList.add("pill") // add css style to the pill
 
-      if (icons) {
+      if (icons) { // if icons are provided, add them to the pill
         let icon_span = pill.appendChild(document.createElement("span"))
         icon_span.classList.add("icon")
         icon_span.textContent = icons[i]
@@ -43,7 +45,11 @@ function onRender(event: Event): void {
       pill.appendChild(document.createTextNode(option))
 
       if (i === index) {
-        pill.classList.add("selected")
+        if(reset){
+          pill.classList.remove("selected") // remove the selected class
+        }else{
+          pill.classList.add("selected")
+        }
       }
 
       pill.onclick = function () {
@@ -64,7 +70,10 @@ function onRender(event: Event): void {
           Streamlit.setComponentValue(i)
           pill.classList.add("selected")
         }
+      
       }
+
+
     })
   }
 
