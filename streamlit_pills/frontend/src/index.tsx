@@ -22,7 +22,6 @@ function onRender(event: Event): void {
   let reset = data.args["reset"]
   
   let clearable = data.args["clearable"]
-  console.log(options)
 
   if (label_visibility === "hidden") {
     labelDiv.style.visibility = "hidden"
